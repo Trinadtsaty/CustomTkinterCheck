@@ -1,4 +1,6 @@
 import customtkinter as ctk
+from app.button import RedButton, YellowButton, GreenButton
+
 from tkinter import filedialog, messagebox
 import os
 from collections import Counter
@@ -12,8 +14,23 @@ class FileAnalyzerApp(ctk.CTk):
         super().__init__()  # Вызываем конструктор родительского класса (ctk.CTk)
 
 
-    pass
+        self.title("Проба пера")
+        self.geometry("600x500")
+        self.minsize(500, 400)
+        self.iconbitmap("IMG/folder_icon.ico")
 
+        self.create_widgets()
+
+    def create_widgets(self):
+        # Создаем кнопки используя наши классы
+        red_button = RedButton(self)
+        red_button.pack(pady=20)
+
+        yellow_button = YellowButton(self)
+        yellow_button.pack(pady=20)
+
+        green_button = GreenButton(self)
+        green_button.pack(pady=20)
 
 
 
