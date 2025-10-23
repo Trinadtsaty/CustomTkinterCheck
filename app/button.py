@@ -1,68 +1,31 @@
 import customtkinter as ctk
+from .decorator import validate_attributes_decorator
 
 
 # 1. Класс для красной кнопки
-class RedButton(ctk.CTkButton):
-    def __init__(self, master, **kwargs):
-        # Вызываем конструктор родительского класса (CTkButton)
+class CustomButton(ctk.CTkButton):
+    def __init__(self, master, text="Красная кнопка",fg_color="#ff4444",hover_color="#cc3333", text_color="white", command=None, **kwargs):
         super().__init__(
             master=master,
-            text="Красная кнопка",
-            fg_color="#ff4444",  # Основной цвет - красный
-            hover_color="#cc3333",  # Цвет при наведении - темно-красный
-            text_color="white",  # Цвет текста - белый
-            command=self.on_click,  # Привязываем метод обработки
-            **kwargs  # Передаем дополнительные аргументы
-        )
-
-    def on_click(self):
-        print("Это красная кнопка!")
-
-
-# 2. Класс для желтой кнопки
-class YellowButton(ctk.CTkButton):
-    def __init__(self, master, **kwargs):
-        super().__init__(
-            master=master,
-            text="Желтая кнопка",
-            fg_color="#ffcc00",  # Основной цвет - желтый
-            hover_color="#cc9900",  # Цвет при наведении - темно-желтый
-            text_color="black",  # Цвет текста - черный (лучше видно на желтом)
-            command=self.on_click,
+            text=text,
+            fg_color=fg_color,
+            hover_color=hover_color,
+            text_color=text_color,
+            command=self._on_click,
             **kwargs
         )
-
-    def on_click(self):
-        print("Это желтая кнопка!")
+        self.external_command = command
 
 
-# 3. Класс для зеленой кнопки
-class GreenButton(ctk.CTkButton):
-    def __init__(self, master, **kwargs):
-        super().__init__(
-            master=master,
-            text="Зеленая кнопка",
-            fg_color="#44ff44",  # Основной цвет - зеленый
-            hover_color="#33cc33",  # Цвет при наведении - темно-зеленый
-            text_color="white",
-            command=self.on_click,
-            **kwargs
-        )
+    @validate_attributes_decorator
+    def _on_click(self):
+        """Наш универсальный обработчик клика"""
+        # 1. Всегда выполняем нашу логику
+        print("CustomButton: Кнопка нажата!")
 
-    def on_click(self):
-        print("Это зеленая кнопка!")
+        # 2. Выполняем пользовательскую команду если она есть
+        if callable(self.external_command):
+            self.external_command()
+        else:
+            print("Не передано")
 
-
-class DynamicButton(ctk.CTkButton):
-    def __init__(self, master, **kwargs):
-        self._command = kwargs.pop('command', None)
-        super().__init__(master, command=self._execute, **kwargs)
-
-    def set_command(self, new_command):
-        """Изменяет команду кнопки динамически"""
-        self._command = new_command
-
-    def _execute(self):
-        """Выполняет текущую команду"""
-        if self._command:
-            self._command()

@@ -1,36 +1,32 @@
 import customtkinter as ctk
-from app.button import RedButton, YellowButton, GreenButton
+from app.SearcPage import SearchScreen
 
-from tkinter import filedialog, messagebox
-import os
-from collections import Counter
-
-# Настройка внешнего вида
 ctk.set_appearance_mode("System")  # "Light", "Dark", "System"
 ctk.set_default_color_theme("blue")  # "blue", "green", "dark-blue"
 
+
 class FileAnalyzerApp(ctk.CTk):
     def __init__(self):
-        super().__init__()  # Вызываем конструктор родительского класса (ctk.CTk)
+        super().__init__()  # Вызываем конструктор родительского класса
 
+        # Настройка главного окна
         self.title("Проба пера")
         self.geometry("600x500")
         self.minsize(500, 400)
         self.iconbitmap("IMG/folder_icon.ico")
 
-        self.create_widgets()
+        # Создаем контейнер для экранов
+        self.container = ctk.CTkFrame(self)
+        self.container.pack(fill="both", expand=True, padx=10, pady=10)
 
-    def create_widgets(self):
-        # Создаем кнопки используя наши классы
-        red_button = RedButton(self)
-        red_button.pack(pady=20)
+        # Показываем стартовый экран
+        self.show_search_screen()
 
-        yellow_button = YellowButton(self)
-        yellow_button.pack(pady=20)
-
-        green_button = GreenButton(self)
-        green_button.pack(pady=20)
-
+    def show_search_screen(self):
+        """Показать экран поиска файлов"""
+        # Создаем экран поиска
+        search_screen = SearchScreen(self.container, self)
+        search_screen.pack(fill="both", expand=True)
 
 
 if __name__ == "__main__":
