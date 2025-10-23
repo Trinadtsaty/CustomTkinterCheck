@@ -1,7 +1,6 @@
 import customtkinter as ctk
 from .decorator import validate_attributes_decorator
 
-
 # 1. Класс для красной кнопки
 class CustomButton(ctk.CTkButton):
     def __init__(self, master, text="Красная кнопка",fg_color="#ff4444",hover_color="#cc3333", text_color="white", command=None, **kwargs):
@@ -16,7 +15,6 @@ class CustomButton(ctk.CTkButton):
         )
         self.external_command = command
 
-
     @validate_attributes_decorator
     def _on_click(self):
         """Наш универсальный обработчик клика"""
@@ -28,4 +26,3 @@ class CustomButton(ctk.CTkButton):
             self.external_command()
         else:
             print("Не передано")
-

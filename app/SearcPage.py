@@ -168,8 +168,6 @@ class SearchScreen(ctk.CTkFrame):
             print("Выбор папки отменен")
             return None  # Возвращаем None чтобы показать что выбор отменен
 
-
-
     def create_audio_list(self):
         print("Функция вызвана")
         audio_files = {}
@@ -208,9 +206,6 @@ class SearchScreen(ctk.CTkFrame):
             json.dump(audio_files, f, ensure_ascii=False, indent=2)
 
         return audio_files
-
-
-        # self.update_info_text("Нажата кнопка 2")
 
     def button3_clicked(self):
         """Обработчик нажатия кнопки 3"""

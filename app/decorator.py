@@ -13,7 +13,6 @@ def timer_decorator(func):
         return result
     return wrapper
 
-
 # 2. Декоратор для проверки атрибутов функции
 def validate_attributes_decorator(func):
     @wraps(func)
@@ -34,5 +33,3 @@ def validate_attributes_decorator(func):
             return func(self, *args, **kwargs)  # Все равно выполняем
 
     return wrapper
-
-
