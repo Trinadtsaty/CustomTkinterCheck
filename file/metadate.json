@@ -1,15 +1,15 @@
 {
   "metadata": {
-      "\\xa9nam": "Название трека (Title)",
-      "\\xa9ART": "Исполнитель (Artist)",
-      "\\xa9alb": "Альбом (Album)",
-      "trkn": "Номер трека (Track number)",
-      "disk": "Номер диска (Disc number)",
-      "\\xa9day": "Год выпуска (Year)",
-      "\\xa9gen": "Жанр (Genre)",
-      "\\xa9wrt": "Композитор (Composer)",
-      "aART": "Исполнитель альбома (Album Artist)",
-      "\\xa9too": "Программа кодирования (Encoding software)",
-      "\\xa9cmt": "Комментарий (Comment)"
-    }
+    "\\xa9nam": "Название трека (Title)",
+    "\\xa9ART": "Исполнитель (Artist)",
+    "\\xa9alb": "Альбом (Album)",
+    "trkn": "Номер трека (Track number)",
+    "disk": "Номер диска (Disc number)",
+    "\\xa9day": "Год выпуска (Year)",
+    "\\xa9gen": "Жанр (Genre)",
+    "\\xa9wrt": "Композитор (Composer)",
+    "aART": "Исполнитель альбома (Album Artist)",
+    "\\xa9too": "Программа кодирования (Encoding software)",
+    "\\xa9cmt": "Комментарий (Comment)"
+  }
 }

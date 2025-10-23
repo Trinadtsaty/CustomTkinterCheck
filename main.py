@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from app.SearcPage import SearchScreen
+import os
 
 ctk.set_appearance_mode("System")  # "Light", "Dark", "System"
 ctk.set_default_color_theme("blue")  # "blue", "green", "dark-blue"
@@ -21,6 +22,7 @@ class FileAnalyzerApp(ctk.CTk):
 
         # Показываем стартовый экран
         self.show_search_screen()
+
 
     def show_search_screen(self):
         """Показать экран поиска файлов"""

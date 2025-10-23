@@ -12,9 +12,55 @@ class SearchScreen(ctk.CTkFrame):
         super().__init__(parent)
         self.controller = controller  # Сохраняем ссылку на главное приложение
         self.folder_path = None
+        self.audio_list_path = "file/audio_list.json"
+        self.metafate_path = "file/metadate.json"
 
         # Создаем виджеты экрана
         self.create_widgets()
+        self.check_folder()
+
+    def check_folder(self):
+        """
+        Проверяет существование ключевых файлов и создает их если нужно
+        """
+        # Создаем папку если не существует
+        folder = os.path.dirname(self.audio_list_path)
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+            print(f"Создана папка: {folder}")
+
+        # Проверяем и создаем audio_list.json если нужно
+        if not os.path.exists(self.audio_list_path):
+            with open(self.audio_list_path, 'w', encoding='utf-8') as f:
+                json.dump({}, f)  # Пустой список
+            print(f"Создан файл: {self.audio_list_path}")
+        else:
+            print(f"Файл уже существует: {self.audio_list_path}")
+
+        # Проверяем и создаем metadate.json если нужно
+        if not os.path.exists(self.metafate_path):
+            # Данные для метаданных
+            metadata_template = {
+                "metadata": {
+                    "\\xa9nam": "Название трека (Title)",
+                    "\\xa9ART": "Исполнитель (Artist)",
+                    "\\xa9alb": "Альбом (Album)",
+                    "trkn": "Номер трека (Track number)",
+                    "disk": "Номер диска (Disc number)",
+                    "\\xa9day": "Год выпуска (Year)",
+                    "\\xa9gen": "Жанр (Genre)",
+                    "\\xa9wrt": "Композитор (Composer)",
+                    "aART": "Исполнитель альбома (Album Artist)",
+                    "\\xa9too": "Программа кодирования (Encoding software)",
+                    "\\xa9cmt": "Комментарий (Comment)"
+                }
+            }
+
+            with open(self.metafate_path, 'w', encoding='utf-8') as f:
+                json.dump(metadata_template, f, ensure_ascii=False, indent=2)
+            print(f"Создан файл: {self.metafate_path}")
+        else:
+            print(f"Файл уже существует: {self.metafate_path}")
 
     def create_widgets(self):
         """Создание всех виджетов экрана"""
@@ -135,11 +181,13 @@ class SearchScreen(ctk.CTkFrame):
             print(file)
             print(file.lower().endswith(('.mp3', '.m4a')))
             if file.lower().endswith(('.mp3', '.m4a')):
-                file_stem = Path(file).stem
+                name, extension = os.path.splitext(file)
+                # file_stem = Path(file).stem
                 audio_files[str(counter)] = {
-                    "file_name": file,
+                    "file_name": name,
+                    "file_extension":extension,
                     "metadata": {
-                        "\\xa9nam": file_stem,  # Название трека (Title) str
+                        "\\xa9nam": name,  # Название трека (Title) str
                         "\\xa9ART": None,  # Исполнитель (Artist) str
                         "\\xa9alb": None,  # Альбом (Album) str
                         "trkn": None,  # Номер трека (Track number) tuple
@@ -153,8 +201,10 @@ class SearchScreen(ctk.CTkFrame):
                     }
                 }
                 counter += 1
+        if counter == 1:
+            self.update_info_text("В папке нет файлов расширения '.mp3' и .m4a")
 
-        with open("file/audio_list.json", "w", encoding="utf-8") as f:
+        with open(self.audio_list_path, "w", encoding="utf-8") as f:
             json.dump(audio_files, f, ensure_ascii=False, indent=2)
 
         return audio_files
