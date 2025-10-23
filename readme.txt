@@ -20,7 +20,4 @@
 Экспортируйте список библиотек в requirements.txt
     pip freeze > requirements.txt
 
-self - это ссылка на сам объект (наше окно).
-После super().__init__() наш объект self становится полноценным окном CustomTkinter,
-поэтому мы можем вызывать все методы CTk через self.
 
