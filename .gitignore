@@ -1,5 +1,6 @@
 #*.py
 !app/
 !main.py
+file/audio_list.json
 class_button.py
 test.py
