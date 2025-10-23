@@ -13,7 +13,6 @@ class FileAnalyzerApp(ctk.CTk):
     def __init__(self):
         super().__init__()  # Вызываем конструктор родительского класса (ctk.CTk)
 
-
         self.title("Проба пера")
         self.geometry("600x500")
         self.minsize(500, 400)

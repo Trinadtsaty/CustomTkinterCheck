@@ -51,3 +51,18 @@ class GreenButton(ctk.CTkButton):
 
     def on_click(self):
         print("Это зеленая кнопка!")
+
+
+class DynamicButton(ctk.CTkButton):
+    def __init__(self, master, **kwargs):
+        self._command = kwargs.pop('command', None)
+        super().__init__(master, command=self._execute, **kwargs)
+
+    def set_command(self, new_command):
+        """Изменяет команду кнопки динамически"""
+        self._command = new_command
+
+    def _execute(self):
+        """Выполняет текущую команду"""
+        if self._command:
+            self._command()
